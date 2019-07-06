@@ -82,20 +82,26 @@ export default function ShowCelebs() {
   }, []);
 
   return (
-    <div>
+    <div className="mt-1 mb-1">
       <AddCeleb />
-      show Celebs
-      <button
-        className="btn btn-success"
-        onClick={() => {
-          var elm = document.getElementById("addCeleb");
-          if (elm) {
-            elm.style.visibility = "visible";
-          }
-        }}
-      >
-        +Celeb
-      </button>
+      <div className="text-right">
+        <button
+          className="btn btn-success ml-1 mr-3"
+          onClick={() => {
+            var elm = document.getElementById("addCeleb");
+            if (elm) {
+              elm.style.visibility = "visible";
+            }
+          }}
+        >
+          +Celebrity
+        </button>
+      </div>
+
+      <span className="text-left">
+        <h4 className="ml-2">Show Celebrities</h4>
+        <hr />
+      </span>
       {celebList.map((item, index) => {
         return <EachCeleb celeb={item} />;
       })}

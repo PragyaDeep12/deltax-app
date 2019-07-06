@@ -25,8 +25,8 @@ export function uploadFile(
   return promise;
 }
 
-export function downloadFile(path: string, setPoster) {
-  var promise = new Promise((resolve, reject) => {
+export function downloadFile(path: string): Promise<string> {
+  var promise = new Promise<string>((resolve, reject) => {
     // var pathReference = firebase.storage().ref(path);
     // console.log(pathReference);
     // resolve(pathReference);
@@ -34,7 +34,7 @@ export function downloadFile(path: string, setPoster) {
       .child(path)
       .getDownloadURL()
       .then(url => {
-        setPoster(url);
+        // setPoster(url);
         resolve(url);
       })
       .catch(err => reject(null));

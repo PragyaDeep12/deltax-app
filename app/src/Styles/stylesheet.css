@@ -36,11 +36,18 @@
   width: 300px;
 }
 .basic-form {
-  display: absolute;
+  display: fixed;
+  padding: 20px;
   margin-right: auto;
   margin-left: auto;
-  padding: 20px;
-  max-width: 400px;
+  width: calc(300px + 10vw);
+  /* max-width: 350px; */
+  /* height: 70vh;*/
+  margin-top: calc(10vh);
+  border-radius: 5px;
+  z-index: 10;
+  /* transform: translateY(calc(-35vh)); */
+  /* transform: scaleX(-50%);  */
 }
 .pointer {
   cursor: pointer;
@@ -180,7 +187,7 @@
   top: 0;
   height: 100vh;
   width: 100vw;
-  background: rgba(211, 211, 211, 0.8);
+  background: rgba(99, 99, 99, 0.411);
   z-index: 40;
 }
 /* .add-celeb-form {

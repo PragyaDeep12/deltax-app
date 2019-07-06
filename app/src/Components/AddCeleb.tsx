@@ -38,44 +38,46 @@ export default function AddCeleb() {
       id="addCeleb"
     >
       <div className="basic-form bg-light">
-        Add Celebrity
+        <h5> Add Celebrity</h5>
         <div>
-          <div className="basic-form">
+          <div>
             {/* <h2 className="">Register</h2> */}
             <form
               onSubmit={e => {
                 formSubmit(e);
               }}
             >
-              <TextField
-                id="outlined-full-width"
-                label="Name"
-                style={{ margin: 0 }}
+              <input
+                type="text"
+                className="form-control"
                 placeholder="Enter Name"
-                fullWidth
-                margin="normal"
-                variant="outlined"
-                InputLabelProps={{
-                  shrink: true
-                }}
                 onChange={e => {
                   setName(e.target.value);
                   console.log(e.target.value);
                 }}
               />
-              <br />
+              {/* <input
+                type="text"
+                id="outlined-full-width"
+                label="Name"
+                placeholder="Enter Name"
+                onChange={e => {
+                  setName(e.target.value);
+                  console.log(e.target.value);
+                }}
+              /> */}
               <div className="row">
-                <div className="">
-                  <SingleSelect
-                    setGenderFunction={value => {
-                      console.log(value);
-                      setGender(value);
-                    }}
-                  />
-                </div>
+                <SingleSelect
+                  setGenderFunction={value => {
+                    console.log(value);
+                    setGender(value);
+                  }}
+                />
               </div>
+              <br />
               <div>
                 <DatePicker
+                  fullWidth
                   setDateFunction={value => {
                     console.log(value);
                     setDob(value);
@@ -83,7 +85,15 @@ export default function AddCeleb() {
                 />
               </div>
               <br />
-              <TextField
+              <textarea
+                className="form-control"
+                placeholder="Enter Bio"
+                onChange={e => {
+                  setBio(e.target.value);
+                  console.log(e.target.value);
+                }}
+              />
+              {/* <TextField
                 id="outlined-full-width"
                 label="Bio"
                 style={{ margin: 0 }}
@@ -100,14 +110,14 @@ export default function AddCeleb() {
                 }}
               />
               <br />
+              <br /> */}
               <br />
-
               <button
                 type="submit"
                 className="btn btn-primary"
                 onClick={formSubmit}
               >
-                Add Celeb
+                Add Celebrity
               </button>
               <br />
               <button

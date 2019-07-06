@@ -1,19 +1,26 @@
 import * as React from "react";
 import { useState } from "react";
 import { downloadFile } from "../Dao/FirebaseDao";
+
+import UploadingIcon from "../icons/spinner.svg";
 export default function EachMovie(props) {
   const { movie } = props;
-  const [poster, setPoster] = useState("");
+  const [poster, setPoster] = useState<string>("");
   const actors = props.movie.cast;
   React.useEffect(() => {
     console.log(movie.posterUrl);
     var response = movie.posterUrl
-      ? downloadFile(movie.posterUrl, setPoster)
+      ? downloadFile(movie.posterUrl).then(res => {
+          if (res) setPoster(res);
+        })
       : "";
   }, []);
   return (
     <div className="row each-movie-row">
-      <img className={"col-md-3 movie "} src={poster} />
+      <img
+        className={"col-md-3 movie "}
+        src={poster === "" ? UploadingIcon : poster}
+      />
 
       <div className="each-movie-col col-md-1">{movie.name}</div>
       <div className="each-movie-col col-md-1">
