@@ -460,3 +460,13 @@
   height: 100vh;
   background: #ff999a;
 }
+
+.preview-image {
+  margin: 20px;
+  width: 200px;
+  max-height: 200px;
+  /* transform: rotate(90deg); */
+}
+.makeStyles-root-1 {
+  height: 50px !important;
+}

@@ -30,7 +30,7 @@ export default function Navbar() {
       <div className="col-md-3 navbar">
         {console.log(loginInfo)}
         {loginInfo.isLoggedIn === true ? (
-          <span>
+          <span className="text-right">
             <img className="online-user user-icon" />
             <button
               className="btn btn-light"
@@ -42,9 +42,11 @@ export default function Navbar() {
             </button>
           </span>
         ) : (
-          <Link to="/signup">
-            <button className="btn btn-primary">Sign In</button>
-          </Link>
+          <div className="text-right" style={{ width: "100%" }}>
+            <Link to="/signup" className="btn btn-primary">
+              Sign In
+            </Link>
+          </div>
         )}
         {/* <img className="menu-icon" /> */}
       </div>

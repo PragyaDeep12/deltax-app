@@ -83,11 +83,33 @@ export default function ShowMovies() {
     }
   ]);
   return (
-    <div>
-      show movies
-      <Link to="/movies/add" className="btn btn-success">
+    <div className="text-right mt-1 mb-1">
+      <Link to="/movies/add" className="btn btn-success ml-1 mr-3">
         + Movie
       </Link>
+
+      <span className="text-left">
+        <h4 className="ml-2">Show Movies</h4>
+        <hr />
+      </span>
+      <div className="row text-center bg-light">
+        <div className="col-md-3">
+          <h5>PICTURE</h5>
+        </div>
+        <div className="col-md-1">
+          <h5>NAME</h5>
+        </div>
+        <div className="col-md-1">
+          <h5>YOR</h5>
+        </div>
+
+        <div className="col-md-5">
+          <h5>DESCRIPTION</h5>
+        </div>
+        <div className="col-md-2">
+          <h5>CAST</h5>
+        </div>
+      </div>
       {movieList.map((item, index) => {
         return <EachMovie movie={item} />;
       })}

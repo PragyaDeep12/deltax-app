@@ -11,7 +11,7 @@ var firebaseConfig = {
   authDomain: "popcorn-cinemas.firebaseapp.com",
   databaseURL: "https://popcorn-cinemas.firebaseio.com",
   projectId: "popcorn-cinemas",
-  storageBucket: "",
+  storageBucket: "popcorn-cinemas.appspot.com",
   messagingSenderId: "907631886056",
   appId: "1:907631886056:web:31693c1e1b33fe0d"
 };
