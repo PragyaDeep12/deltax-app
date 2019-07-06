@@ -1,6 +1,8 @@
 import MovieModel from "./Models/MovieModel";
 
-export function isValidMovie(movie: MovieModel) {
+export function isValidMovie(
+  movie: MovieModel
+): { isValid: boolean; message: String } {
   if (movie) {
     //movie isn't null
     if (movie.name) {
@@ -11,23 +13,26 @@ export function isValidMovie(movie: MovieModel) {
           //movie poster is not null
           if (movie.cast && movie.cast.length > 0) {
             //movie casts empty
-            handleMovieResponse(true, "Form Success");
+            return handleMovieResponse(true, "Form Success");
           } else {
-            handleMovieResponse(false, "Movie Casts is empty");
+            return handleMovieResponse(false, "Movie Casts is empty");
           }
         } else {
-          handleMovieResponse(false, "Movie Poster is empty");
+          return handleMovieResponse(false, "Movie Poster is empty");
         }
       } else {
-        handleMovieResponse(false, "Movie Plot is empty");
+        return handleMovieResponse(false, "Movie Plot is empty");
       }
     } else {
-      handleMovieResponse(false, "Movie Name is empty");
+      return handleMovieResponse(false, "Movie Name is empty");
     }
   } else {
-    handleMovieResponse(false, "Movie is Null");
+    return handleMovieResponse(false, "Movie is Null");
   }
 }
-export function handleMovieResponse(isValid, message) {
+export function handleMovieResponse(
+  isValid,
+  message
+): { isValid: boolean; message: String } {
   return { isValid: isValid, message: message };
 }

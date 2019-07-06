@@ -5,4 +5,6 @@ export default interface MovieModel {
   cast?: Array<CelebsModel> | null;
   plot?: string | null;
   poster?: string | null;
+  posterUrl?: string;
+  yearOfRelease?: number;
 }

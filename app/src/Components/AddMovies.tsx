@@ -12,11 +12,9 @@ export default function AddMovies() {
   const [plot, setPlot] = useState("");
   const [cast, setCast]: [Array<CelebsModel>, any] = useState([]);
   const [poster, setPoster] = useState<any>("");
+  const [downloadUrl, setDownloadUrl] = useState<string>("");
   const [uploadImage, setUploadImage] = useState();
   const [isUploading, setIsUploading] = useState<boolean>(false);
-  useEffect(() => {
-    console.log(poster);
-  }, [poster]);
   const uImage = () => {
     setIsUploading(true);
     uploadFile(uploadImage, e => {
@@ -24,7 +22,10 @@ export default function AddMovies() {
     })
       .then(res => {
         //uploaded file comes in res
-        setPoster(URL.createObjectURL(res));
+        if (res && res.file && res.downloadPath) {
+          setDownloadUrl(res.downloadPath);
+          setPoster(URL.createObjectURL(res.file));
+        }
       })
       .catch(err => {
         console.log(err);
@@ -35,10 +36,17 @@ export default function AddMovies() {
       name: name,
       plot: plot,
       cast: cast,
-      poster: poster
+      posterUrl: downloadUrl,
+      yearOfRelease: yearOfRelease
     };
 
-    addMovie(movie);
+    addMovie(movie)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   return (
     <div>
@@ -122,7 +130,6 @@ export default function AddMovies() {
                   setCast(value);
                 }}
               />
-              {console.log(cast)}
             </div>
             <img
               src={isUploading ? UploadingIcon : poster ? poster : PreviewImage}
