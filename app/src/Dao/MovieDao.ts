@@ -43,7 +43,9 @@ export const getMovies = async setMovieList => {
             var movie: MovieModel = {
               name: data.name,
               cast: data.cast,
-              plot: data.plot
+              plot: data.plot,
+              posterUrl: data.posterUrl,
+              yearOfRelease: data.yearOfRelease
             };
             if (movie) list.push(movie);
           }
