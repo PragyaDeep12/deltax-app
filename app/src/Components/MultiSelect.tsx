@@ -24,51 +24,13 @@ import { OptionProps } from "react-select";
 import { PlaceholderProps } from "react-select";
 import { SingleValueProps } from "react-select";
 import { ValueType } from "react-select";
-
+import { useState, useEffect } from "react";
+import { getCelebs } from "../Dao/CelebDao";
+import CelebsModel from "../Models/CelebsModel";
 interface OptionType {
-  label: string;
-  value: string;
+  label?: string | any;
+  value?: string | any;
 }
-
-const suggestions: OptionType[] = [
-  { label: "Afghanistan" },
-  { label: "Aland Islands" },
-  { label: "Albania" },
-  { label: "Algeria" },
-  { label: "American Samoa" },
-  { label: "Andorra" },
-  { label: "Angola" },
-  { label: "Anguilla" },
-  { label: "Antarctica" },
-  { label: "Antigua and Barbuda" },
-  { label: "Argentina" },
-  { label: "Armenia" },
-  { label: "Aruba" },
-  { label: "Australia" },
-  { label: "Austria" },
-  { label: "Azerbaijan" },
-  { label: "Bahamas" },
-  { label: "Bahrain" },
-  { label: "Bangladesh" },
-  { label: "Barbados" },
-  { label: "Belarus" },
-  { label: "Belgium" },
-  { label: "Belize" },
-  { label: "Benin" },
-  { label: "Bermuda" },
-  { label: "Bhutan" },
-  { label: "Bolivia, Plurinational State of" },
-  { label: "Bonaire, Sint Eustatius and Saba" },
-  { label: "Bosnia and Herzegovina" },
-  { label: "Botswana" },
-  { label: "Bouvet Island" },
-  { label: "Brazil" },
-  { label: "British Indian Ocean Territory" },
-  { label: "Brunei Darussalam" }
-].map(suggestion => ({
-  value: suggestion.label,
-  label: suggestion.label
-}));
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -314,6 +276,59 @@ export default function MultiSelect(props) {
   const [single, setSingle] = React.useState<ValueType<OptionType>>(null);
   const [multi, setMulti] = React.useState<ValueType<OptionType>>(null);
 
+  const [suggestions, setSuggestion]: [Array<OptionType>, any] = useState([]);
+
+  // [
+  //   { label: "Afghanistan" },
+  //   { label: "Aland Islands" },
+  //   { label: "Albania" },
+  //   { label: "Algeria" },
+  //   { label: "American Samoa" },
+  //   { label: "Andorra" },
+  //   { label: "Angola" },
+  //   { label: "Anguilla" },
+  //   { label: "Antarctica" },
+  //   { label: "Antigua and Barbuda" },
+  //   { label: "Argentina" },
+  //   { label: "Armenia" },
+  //   { label: "Aruba" },
+  //   { label: "Australia" },
+  //   { label: "Austria" },
+  //   { label: "Azerbaijan" },
+  //   { label: "Bahamas" },
+  //   { label: "Bahrain" },
+  //   { label: "Bangladesh" },
+  //   { label: "Barbados" },
+  //   { label: "Belarus" },
+  //   { label: "Belgium" },
+  //   { label: "Belize" },
+  //   { label: "Benin" },
+  //   { label: "Bermuda" },
+  //   { label: "Bhutan" },
+  //   { label: "Bolivia, Plurinational State of" },
+  //   { label: "Bonaire, Sint Eustatius and Saba" },
+  //   { label: "Bosnia and Herzegovina" },
+  //   { label: "Botswana" },
+  //   { label: "Bouvet Island" },
+  //   { label: "Brazil" },
+  //   { label: "British Indian Ocean Territory" },
+  //   { label: "Brunei Darussalam" }
+  // ].map(suggestion => ({
+  //   value: suggestion.label,
+  //   label: suggestion.label
+  // }));
+  const [celebList, setCelebList]: [Array<CelebsModel>, any] = useState([]);
+  const callBack = async clist => {
+    await clist.map((item, index) => {
+      let celeb: OptionType = { value: item.name, label: item.name };
+      setSuggestion([...suggestions, celeb]);
+    });
+  };
+  useEffect(() => {
+    getCelebs(setCelebList).then(res => {
+      callBack(celebList);
+    });
+  }, []);
   async function handleChangeMulti(value: ValueType<OptionType>) {
     await setMulti(value);
     console.log(multi);

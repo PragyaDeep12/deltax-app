@@ -201,6 +201,15 @@
   background: rgba(99, 99, 99, 0.411);
   z-index: 40;
 }
+.absolute-center {
+  display: table-cell;
+  vertical-align: middle;
+}
+.edit-icon {
+  content: url("../icons/edit.svg");
+  width: 16px;
+  height: 16px;
+}
 /* .add-celeb-form {
   background: whitesmoke;
 } */

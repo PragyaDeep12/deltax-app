@@ -17,33 +17,36 @@ export default function EachMovie(props) {
       : "";
   }, []);
   return (
-    <Link
-      to={{
-        pathname: "/movies/edit",
-        state: {
-          movie: movie
-        }
-      }}
-    >
-      <div className="row each-movie-row">
-        <img
-          className={"col-md-3 movie "}
-          src={poster === "" ? UploadingIcon : poster}
-        />
+    <div className="row each-movie-row">
+      <img
+        className={"col-md-3 movie "}
+        src={poster === "" ? UploadingIcon : poster}
+      />
 
-        <div className="each-movie-col col-md-1">{movie.name}</div>
-        <div className="each-movie-col col-md-1">
-          {movie.yearOfRelease ? movie.yearOfRelease : 2019}
-        </div>
-        <div className="each-movie-col col-md-5 justify-text">{movie.plot}</div>
-        <div className="each-movie-col col-md-2">
-          {movie.cast
-            ? movie.cast.map((item, index) => {
-                return <div className="col">{item.name}</div>;
-              })
-            : ""}
-        </div>
+      <div className="each-movie-col col-md-2">{movie.name}</div>
+      <div className="each-movie-col col-md-1">
+        {movie.yearOfRelease ? movie.yearOfRelease : 2019}
       </div>
-    </Link>
+      <div className="each-movie-col col-md-3 justify-text">{movie.plot}</div>
+      <div className="each-movie-col col-md-2">
+        {movie.cast
+          ? movie.cast.map((item, index) => {
+              return <div className="col">{item.name}</div>;
+            })
+          : ""}
+      </div>
+      <div className="each-movie-col col-md-1">
+        <Link
+          to={{
+            pathname: "/movies/edit",
+            state: {
+              movie: movie
+            }
+          }}
+        >
+          <img className="edit-icon  absolute-center" />
+        </Link>
+      </div>
+    </div>
   );
 }

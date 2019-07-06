@@ -101,18 +101,21 @@ export default function ShowMovies() {
         <div className="col-md-3">
           <h5>PICTURE</h5>
         </div>
-        <div className="col-md-1">
+        <div className="col-md-2">
           <h5>NAME</h5>
         </div>
         <div className="col-md-1">
           <h5>YOR</h5>
         </div>
 
-        <div className="col-md-5">
+        <div className="col-md-3">
           <h5>PLOT</h5>
         </div>
         <div className="col-md-2">
           <h5>CAST</h5>
+        </div>
+        <div className="col-md-1">
+          <h5>EDIT</h5>
         </div>
       </div>
       {movieList.map((item, index) => {

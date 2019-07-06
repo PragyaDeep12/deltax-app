@@ -6,6 +6,8 @@ import PreviewImage from "../icons/picture.svg";
 import UploadingIcon from "../icons/spinner.svg";
 import { uploadFile, downloadFile } from "../Dao/FirebaseDao";
 import { addMovie } from "../Dao/MovieDao";
+import { Link } from "react-router-dom";
+import AddCeleb from "./AddCeleb";
 export default function AddMovies(props) {
   const { movie } = props;
   const [name, setName] = useState("");
@@ -90,6 +92,7 @@ export default function AddMovies(props) {
   };
   return (
     <div>
+      <AddCeleb />
       <h5>{movie ? "Edit Movie" : "Add Movie"}</h5>
       <div>
         <div className="basic-form">
@@ -174,22 +177,42 @@ export default function AddMovies(props) {
                 }}
               />
             </div>
+            <div className="input-group-append">
+              <span
+                className="input-group-text"
+                id="inputGroupFileAddon02"
+                onClick={() => {
+                  var elm = document.getElementById("addCeleb");
+                  if (elm) {
+                    elm.style.visibility = "visible";
+                  }
+                }}
+              >
+                + Celeb
+              </span>
+            </div>
             <img
               src={isUploading ? UploadingIcon : poster ? poster : PreviewImage}
               className="preview-image"
               alt="Preview Image"
             />
             <br />
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={formSubmit}
-              disabled={isUploading}
-            >
-              {movie ? "Update Movie" : "Add Movie"}
-            </button>
+            <div className="row">
+              <button
+                type="submit"
+                className="col btn btn-primary"
+                onClick={formSubmit}
+                disabled={isUploading}
+              >
+                {movie ? "Update Movie" : "Add Movie"}
+              </button>
+              <Link className="col" to="/movies/show">
+                <button className="btn btn-light">Cancel</button>
+              </Link>
+            </div>
           </form>
         </div>
+
         {/* <Link to="/login" className="hyperlink">
             Login
           </Link>
