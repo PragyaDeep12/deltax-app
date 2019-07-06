@@ -102,8 +102,23 @@ export default function ShowCelebs() {
         <h4 className="ml-2">Show Celebrities</h4>
         <hr />
       </span>
+
+      <div className="row bg-light">
+        <div className="col-md-2 ">
+          <h5>NAME</h5>
+        </div>
+        <div className="col-md-2">
+          <h5>DOB</h5>
+        </div>
+        <div className="col-md-2">
+          <h5>GENDER</h5>
+        </div>
+        <div className="col-md-6">
+          <h5>BIO</h5>
+        </div>
+      </div>
       {celebList.map((item, index) => {
-        return <EachCeleb celeb={item} />;
+        return <EachCeleb celeb={item} key={index} />;
       })}
     </div>
   );

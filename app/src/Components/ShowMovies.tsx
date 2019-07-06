@@ -116,7 +116,7 @@ export default function ShowMovies() {
         </div>
       </div>
       {movieList.map((item, index) => {
-        return <EachMovie movie={item} />;
+        return <EachMovie movie={item} key={index} />;
       })}
     </div>
   );
