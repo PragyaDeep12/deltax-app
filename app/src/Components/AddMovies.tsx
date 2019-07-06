@@ -4,9 +4,10 @@ import CelebsModel from "../Models/CelebsModel";
 import MovieModel from "../Models/MovieModel";
 import PreviewImage from "../icons/picture.svg";
 import UploadingIcon from "../icons/spinner.svg";
-import { uploadFile } from "../Dao/FirebaseDao";
+import { uploadFile, downloadFile } from "../Dao/FirebaseDao";
 import { addMovie } from "../Dao/MovieDao";
-export default function AddMovies() {
+export default function AddMovies(props) {
+  const { movie } = props;
   const [name, setName] = useState("");
   const [yearOfRelease, setYearOfRelease] = useState(0);
   const [plot, setPlot] = useState("");
@@ -15,6 +16,45 @@ export default function AddMovies() {
   const [downloadUrl, setDownloadUrl] = useState<string>("");
   const [uploadImage, setUploadImage] = useState();
   const [isUploading, setIsUploading] = useState<boolean>(false);
+  let isMounted = false;
+
+  const setMovieModel = (movieModel: MovieModel) => {
+    console.log(movieModel);
+    if (
+      movieModel &&
+      movieModel.name &&
+      movieModel.cast &&
+      movieModel.plot &&
+      movieModel.posterUrl &&
+      movieModel.yearOfRelease
+    ) {
+      setName(movieModel.name);
+      setCast(movieModel.cast);
+      setYearOfRelease(movieModel.yearOfRelease);
+      setPlot(movieModel.plot);
+      setDownloadUrl(movieModel.posterUrl);
+    }
+  };
+  // let isMounted =false;
+  // if (!isMounted && movie) {
+  //   isMounted = true;
+  //   if (movie && movie.movie) {
+  //     setMovieModel(movie.movie);
+  //   }
+  // }
+  useEffect(() => {
+    if (!isMounted && movie) {
+      isMounted = true;
+      if (movie && movie.movie) {
+        setMovieModel(movie.movie);
+        setIsUploading(true);
+        downloadFile(movie.movie.posterUrl).then(res => {
+          setIsUploading(false);
+          setPoster(res);
+        });
+      }
+    }
+  }, []);
   const uImage = () => {
     setIsUploading(true);
     uploadFile(uploadImage, e => {
@@ -50,7 +90,7 @@ export default function AddMovies() {
   };
   return (
     <div>
-      <h5>Add Movies</h5>
+      <h5>{movie ? "Edit Movie" : "Add Movie"}</h5>
       <div>
         <div className="basic-form">
           <form
@@ -68,7 +108,8 @@ export default function AddMovies() {
                   //setEmail(e.target.value);
                 }}
                 className="form-control"
-                placeholder="Movie Name"
+                value={name}
+                placeholder={"Movie Name"}
               />
             </div>
 
@@ -82,11 +123,13 @@ export default function AddMovies() {
                 }}
                 className="form-control"
                 placeholder="Year of Release"
+                value={yearOfRelease}
               />
             </div>
             <div className="input-group mb-3">
               <textarea
                 name="Plot"
+                value={plot}
                 onChange={e => {
                   setPlot(e.target.value);
                   //   setRPassword(e.target.value);
@@ -143,7 +186,7 @@ export default function AddMovies() {
               onClick={formSubmit}
               disabled={isUploading}
             >
-              Add Movie
+              {movie ? "Update Movie" : "Add Movie"}
             </button>
           </form>
         </div>

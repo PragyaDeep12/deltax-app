@@ -4,18 +4,22 @@ import AllPlays from "./AllPlays";
 import Movies from "../Components/Movies";
 import Celebs from "../Components/Celebs";
 // import MainComponent from "../Components/MainComponent";
-function MainPage({ match }) {
+function MainPage(props) {
   let component;
+  // const { match } = props.match;
 
   return (
     <div>
       {/* this is the main page */}
       <Navbar />
       <div>
-        {match.params.type === "movies" ? (
-          <Movies function={match.params.function} />
-        ) : match.params.type === "celebs" ? (
-          <Celebs function={match.params.function} />
+        {props.match.params.type === "movies" ? (
+          <Movies
+            function={props.match.params.function}
+            movie={props.location.state}
+          />
+        ) : props.match.params.type === "celebs" ? (
+          <Celebs function={props.match.params.function} />
         ) : (
           <AllPlays />
         )}

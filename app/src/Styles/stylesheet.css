@@ -10,6 +10,7 @@
   -webkit-transform: rotateY(180deg); /* Safari and Chrome */
   -moz-transform: rotateY(180deg); /* Firefox */
 }
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 1px;
@@ -414,9 +415,20 @@
 }
 .each-movie-row {
   margin-top: 1px;
+  cursor: pointer;
+}
+.each-movie-row:hover {
+  background-color: #dadada3f;
 }
 .each-movie-col {
   border: 1pt solid #c2c2c2;
+}
+a {
+  color: #2c2c2c;
+}
+*:hover {
+  text-decoration: none !important;
+  text-decoration-style: dashed !important;
 }
 .subheader {
   color: rgb(32, 29, 32);
