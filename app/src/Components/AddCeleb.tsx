@@ -6,8 +6,8 @@ import CelebsModel from "../Models/CelebsModel";
 import { TextField } from "@material-ui/core";
 import { addCeleb } from "../Dao/CelebDao";
 import { Redirect } from "react-router-dom";
-export default function AddCeleb(props) {
-  const { movie } = props.movie;
+export default function AddCeleb() {
+  // const { movie } = props.movie;
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [dob, setDob] = useState();
