@@ -124,7 +124,7 @@ export default function AddMovies() {
               </div>
             </div>
 
-            <div className="input-group mb-3">
+            <div className="input-group mb-3 cast-selector">
               <MultiSelect
                 setCastFunction={value => {
                   setCast(value);
