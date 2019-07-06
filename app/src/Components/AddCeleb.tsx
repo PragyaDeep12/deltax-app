@@ -37,7 +37,7 @@ export default function AddCeleb() {
       style={{ visibility: "hidden" }}
       id="addCeleb"
     >
-      <div className="basic-form bg-light">
+      <div className="popup bg-light">
         <h5> Add Celebrity</h5>
         <div>
           <div>

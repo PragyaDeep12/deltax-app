@@ -43,12 +43,22 @@
   width: calc(300px + 10vw);
   /* max-width: 350px; */
   /* height: 70vh;*/
-  margin-top: calc(10vh);
   border-radius: 5px;
   z-index: 10;
   /* transform: translateY(calc(-35vh)); */
   /* transform: scaleX(-50%);  */
 }
+.popup {
+  display: fixed;
+  padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  width: calc(300px + 10vw);
+  margin-top: calc(10vh);
+  border-radius: 5px;
+  z-index: 10;
+}
+
 .pointer {
   cursor: pointer;
 }
