@@ -9,7 +9,7 @@ export function isValidMovie(
       //movie name is not null
       if (movie.plot) {
         //movie plot is not null
-        if (movie.poster) {
+        if (movie.posterUrl) {
           //movie poster is not null
           if (movie.cast && movie.cast.length > 0) {
             //movie casts empty
