@@ -340,12 +340,12 @@ export default function MultiSelect(props) {
           styles={selectStyles}
           inputId="react-select-multiple"
           TextFieldProps={{
-            label: "Countries",
+            label: "Cast",
             InputLabelProps: {
               htmlFor: "react-select-multiple",
               shrink: true
             },
-            placeholder: "Select multiple countries"
+            placeholder: "Select multiple actors"
           }}
           options={suggestions}
           components={components}

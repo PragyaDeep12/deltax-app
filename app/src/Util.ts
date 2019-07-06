@@ -1,5 +1,29 @@
 import MovieModel from "./Models/MovieModel";
-
+import CelebsModel from "./Models/CelebsModel";
+export function isValidCeleb(
+  celeb: CelebsModel
+): { isValid: boolean; message: String } {
+  if (celeb) {
+    // celeb isnt null
+    if (celeb.name) {
+      // name isnt null
+      if (celeb.bio) {
+        //bio isnt null
+        if (celeb.dob) {
+          //dob isnt null
+          return { isValid: true, message: "data is valid" };
+        } else {
+          return { isValid: false, message: "dob is Null" };
+        }
+      } else {
+        return { isValid: false, message: "bio is Null" };
+      }
+    } else {
+      return { isValid: false, message: "Name is Null" };
+    }
+  }
+  return { isValid: false, message: "celeb is Null" };
+}
 export function isValidMovie(
   movie: MovieModel
 ): { isValid: boolean; message: String } {
