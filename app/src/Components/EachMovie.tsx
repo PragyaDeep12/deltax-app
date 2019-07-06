@@ -1,11 +1,19 @@
 import * as React from "react";
-import { Component } from "react";
+import { useState } from "react";
+import { downloadFile } from "../Dao/FirebaseDao";
 export default function EachMovie(props) {
   const { movie } = props;
+  const [poster, setPoster] = useState("");
   const actors = props.movie.cast;
+  React.useEffect(() => {
+    console.log(movie.posterUrl);
+    var response = movie.posterUrl
+      ? downloadFile(movie.posterUrl, setPoster)
+      : "";
+  }, []);
   return (
     <div className="row each-movie-row">
-      <img className={"col-md-3 movie " + movie.image} />
+      <img className={"col-md-3 movie "} src={poster} />
 
       <div className="each-movie-col col-md-1">{movie.name}</div>
       <div className="each-movie-col col-md-1">

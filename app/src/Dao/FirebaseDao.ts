@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-import MovieModel from "../Models/MovieModel";
+
 export function uploadFile(
   file,
   setIsUploading
@@ -25,6 +25,22 @@ export function uploadFile(
   return promise;
 }
 
+export function downloadFile(path: string, setPoster) {
+  var promise = new Promise((resolve, reject) => {
+    // var pathReference = firebase.storage().ref(path);
+    // console.log(pathReference);
+    // resolve(pathReference);
+    getCloudStorageRef()
+      .child(path)
+      .getDownloadURL()
+      .then(url => {
+        setPoster(url);
+        resolve(url);
+      })
+      .catch(err => reject(null));
+  });
+  return promise;
+}
 export function getCloudStorageRef() {
   return firebase.storage().ref();
 }
