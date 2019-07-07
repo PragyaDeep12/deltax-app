@@ -102,14 +102,7 @@ export default function SingleSelect(props) {
           onChange={handleChange}
           fullWidth
           id="outlined-age-simple"
-          input={
-            <BootstrapInput
-              // fullWidth
-              // labelWidth={labelWidth}
-              placeholder="Gender"
-              name="age"
-            />
-          }
+          input={<BootstrapInput placeholder="Gender" name="age" />}
         >
           <MenuItem value="">
             <em>None</em>

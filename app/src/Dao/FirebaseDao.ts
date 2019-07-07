@@ -27,14 +27,10 @@ export function uploadFile(
 
 export function downloadFile(path: string): Promise<string> {
   var promise = new Promise<string>((resolve, reject) => {
-    // var pathReference = firebase.storage().ref(path);
-    // console.log(pathReference);
-    // resolve(pathReference);
     getCloudStorageRef()
       .child(path)
       .getDownloadURL()
       .then(url => {
-        // setPoster(url);
         resolve(url);
       })
       .catch(err => reject(null));

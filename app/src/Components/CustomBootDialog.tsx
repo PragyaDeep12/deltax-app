@@ -6,7 +6,7 @@ let CloseDialogFn;
 export default function CustomBootDialog() {
   const [open, setOpen] = useState<boolean>(false);
   const [element, setElement] = useState();
-  const handleOpen = () => {};
+
   const handleClose = () => {
     setOpen(false);
   };

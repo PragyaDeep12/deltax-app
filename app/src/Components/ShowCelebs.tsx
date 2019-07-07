@@ -1,85 +1,34 @@
 import React, { useState, useEffect } from "react";
 import CelebsModel from "../Models/CelebsModel";
-import { Link } from "react-router-dom";
 import EachCeleb from "./EachCeleb";
-import { getCelebs } from "../Dao/CelebDao";
 import AddCeleb from "./AddCeleb";
 import { openModal } from "./CustomBootDialog";
+import { getCloudFirestore } from "../Dao/FirebaseDao";
 export default function ShowCelebs() {
-  const [celebList, setCelebList]: [Array<CelebsModel>, any] = useState([
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // },
-    // {
-    //   name: "Shah Rukh Khan",
-    //   gender: "Male",
-    //   dob: new Date(),
-    //   bio:
-    //     "well known as the badshah of bollywood shah rukh khan is a very influential and famous celebrity"
-    // }
-  ]);
+  const [celebList, setCelebList]: [Array<CelebsModel>, any] = useState([]);
   useEffect(() => {
-    getCelebs(setCelebList);
+    getCloudFirestore()
+      .collection("celebs")
+      .onSnapshot(
+        snapshot => {
+          var list: Array<CelebsModel> = [];
+
+          snapshot.docs.forEach(QueryDocumentSnapShot => {
+            var data = QueryDocumentSnapShot.data();
+            var celeb: CelebsModel = {
+              name: data.name,
+              bio: data.bio,
+              dob: data.dob,
+              gender: data.gender
+            };
+            list.push(celeb);
+          });
+          setCelebList(list);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }, []);
 
   return (

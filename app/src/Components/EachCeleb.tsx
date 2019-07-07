@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Component } from "react";
 import { format } from "date-fns";
 export default function EachCeleb(props) {
   const { celeb } = props;

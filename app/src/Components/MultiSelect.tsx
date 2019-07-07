@@ -25,7 +25,6 @@ import { PlaceholderProps } from "react-select";
 import { SingleValueProps } from "react-select";
 import { ValueType } from "react-select";
 import { useState, useEffect } from "react";
-import { getCelebs } from "../Dao/CelebDao";
 import CelebsModel from "../Models/CelebsModel";
 import AddCeleb from "./AddCeleb";
 import { openModal } from "./CustomBootDialog";
@@ -90,29 +89,15 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function NoOptionsMessage(props: NoticeProps<OptionType>) {
-  // alert("Want to Add the Option " + props);
   return (
-    // <Typography
-    //   color="textSecondary"
-    //   className={props.selectProps.classes.noOptionsMessage}
-    //   {...props.innerProps}
-    //   onClick={() => {
-    //     // alert("Want to Add the Option " + props);
-    //     openModal(<AddCeleb />);
-    //   }}
-    // >
-    //   <span className="list-add-new-item">Add New Item</span>
-    // </Typography>
     <MenuItem
       ref={props.innerRef}
-      // selected={props.isFocused}
       component="div"
       style={{
         fontWeight: props.isSelected ? 500 : 400
       }}
       {...props.innerProps}
       onClick={() => {
-        // alert("Want to Add the Option " + props);
         openModal(<AddCeleb />);
       }}
     >
@@ -299,55 +284,7 @@ export default function MultiSelect(props) {
   const [multi, setMulti] = React.useState<ValueType<OptionType>>(null);
 
   const [suggestions, setSuggestion]: [Array<OptionType>, any] = useState([]);
-
-  // [
-  //   { label: "Afghanistan" },
-  //   { label: "Aland Islands" },
-  //   { label: "Albania" },
-  //   { label: "Algeria" },
-  //   { label: "American Samoa" },
-  //   { label: "Andorra" },
-  //   { label: "Angola" },
-  //   { label: "Anguilla" },
-  //   { label: "Antarctica" },
-  //   { label: "Antigua and Barbuda" },
-  //   { label: "Argentina" },
-  //   { label: "Armenia" },
-  //   { label: "Aruba" },
-  //   { label: "Australia" },
-  //   { label: "Austria" },
-  //   { label: "Azerbaijan" },
-  //   { label: "Bahamas" },
-  //   { label: "Bahrain" },
-  //   { label: "Bangladesh" },
-  //   { label: "Barbados" },
-  //   { label: "Belarus" },
-  //   { label: "Belgium" },
-  //   { label: "Belize" },
-  //   { label: "Benin" },
-  //   { label: "Bermuda" },
-  //   { label: "Bhutan" },
-  //   { label: "Bolivia, Plurinational State of" },
-  //   { label: "Bonaire, Sint Eustatius and Saba" },
-  //   { label: "Bosnia and Herzegovina" },
-  //   { label: "Botswana" },
-  //   { label: "Bouvet Island" },
-  //   { label: "Brazil" },
-  //   { label: "British Indian Ocean Territory" },
-  //   { label: "Brunei Darussalam" }
-  // ].map(suggestion => ({
-  //   value: suggestion.label,
-  //   label: suggestion.label
-  // }));
-
   const [celebList, setCelebList]: [Array<CelebsModel>, any] = useState([]);
-
-  const callBack = async clist => {
-    // await clist.map((item, index) => {
-    //   let celeb: OptionType = { value: item.name, label: item.name };
-    //   setSuggestion([...suggestions, celeb]);
-    // });
-  };
 
   let isMounted = false;
   useEffect(() => {

@@ -49,12 +49,6 @@ export const getMovies = async setMovieList => {
             };
             if (movie) list.push(movie);
           }
-          if (change.type === "modified") {
-            //   console.log("Modified city: ", change.doc.data());
-          }
-          if (change.type === "removed") {
-            //   console.log("Removed city: ", change.doc.data());
-          }
         });
         console.log(list);
         setMovieList(list);

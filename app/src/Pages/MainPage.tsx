@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import AllPlays from "./AllPlays";
 import Movies from "../Components/Movies";
 import Celebs from "../Components/Celebs";
+import StartApp from "./StartApp";
 // import MainComponent from "../Components/MainComponent";
 function MainPage(props) {
   let component;
@@ -21,7 +21,7 @@ function MainPage(props) {
         ) : props.match.params.type === "celebs" ? (
           <Celebs function={props.match.params.function} />
         ) : (
-          <AllPlays />
+          <StartApp />
         )}
       </div>
     </div>

@@ -7,7 +7,6 @@ import UploadingIcon from "../icons/spinner.svg";
 import { uploadFile, downloadFile } from "../Dao/FirebaseDao";
 import { addMovie } from "../Dao/MovieDao";
 import { Link } from "react-router-dom";
-import AddCeleb from "./AddCeleb";
 
 import { Redirect } from "react-router-dom";
 import { openSnackbar } from "./CustomSnackbar";
@@ -41,13 +40,7 @@ export default function AddMovies(props) {
       setDownloadUrl(movieModel.posterUrl);
     }
   };
-  // let isMounted =false;
-  // if (!isMounted && movie) {
-  //   isMounted = true;
-  //   if (movie && movie.movie) {
-  //     setMovieModel(movie.movie);
-  //   }
-  // }
+
   useEffect(() => {
     if (!isMounted && movie) {
       isMounted = true;
@@ -130,7 +123,6 @@ export default function AddMovies(props) {
                 name="name"
                 onChange={e => {
                   setName(e.target.value);
-                  //setEmail(e.target.value);
                 }}
                 className="form-control"
                 value={name}
@@ -144,7 +136,6 @@ export default function AddMovies(props) {
                 name="yearOfRelease"
                 onChange={e => {
                   setYearOfRelease(Number(e.target.value));
-                  //   setPassword(e.target.value);
                 }}
                 className="form-control"
                 placeholder="Year of Release"
@@ -157,7 +148,6 @@ export default function AddMovies(props) {
                 value={plot}
                 onChange={e => {
                   setPlot(e.target.value);
-                  //   setRPassword(e.target.value);
                 }}
                 className="form-control"
                 placeholder="Plot "
@@ -222,12 +212,6 @@ export default function AddMovies(props) {
             </div>
           </form>
         </div>
-
-        {/* <Link to="/login" className="hyperlink">
-            Login
-          </Link>
-       
-        {loginInfo.isLoggedIn && <Redirect to={"/movies/show"} />} */}
       </div>
     </div>
   );
