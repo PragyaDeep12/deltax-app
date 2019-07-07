@@ -445,6 +445,7 @@
   /* background-color: #dadada3f; */
 }
 .each-movie-col {
+  text-align: left;
   border: 1pt solid #c2c2c2;
 }
 a {

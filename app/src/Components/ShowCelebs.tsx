@@ -6,29 +6,33 @@ import { openModal } from "./CustomBootDialog";
 import { getCloudFirestore } from "../Dao/FirebaseDao";
 export default function ShowCelebs() {
   const [celebList, setCelebList]: [Array<CelebsModel>, any] = useState([]);
+  let isMounted = false;
   useEffect(() => {
-    getCloudFirestore()
-      .collection("celebs")
-      .onSnapshot(
-        snapshot => {
-          var list: Array<CelebsModel> = [];
+    if (!isMounted) {
+      isMounted = true;
+      getCloudFirestore()
+        .collection("celebs")
+        .onSnapshot(
+          snapshot => {
+            var list: Array<CelebsModel> = [];
 
-          snapshot.docs.forEach(QueryDocumentSnapShot => {
-            var data = QueryDocumentSnapShot.data();
-            var celeb: CelebsModel = {
-              name: data.name,
-              bio: data.bio,
-              dob: data.dob,
-              gender: data.gender
-            };
-            list.push(celeb);
-          });
-          setCelebList(list);
-        },
-        err => {
-          console.log(err);
-        }
-      );
+            snapshot.docs.forEach(QueryDocumentSnapShot => {
+              var data = QueryDocumentSnapShot.data();
+              var celeb: CelebsModel = {
+                name: data.name,
+                bio: data.bio,
+                dob: data.dob,
+                gender: data.gender
+              };
+              list.push(celeb);
+            });
+            setCelebList(list);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+    }
   }, []);
 
   return (
@@ -49,7 +53,7 @@ export default function ShowCelebs() {
         <hr />
       </span>
 
-      <div className="row bg-light">
+      <div className="row text-left bg-light">
         <div className="col-md-2 ">
           <h5>NAME</h5>
         </div>

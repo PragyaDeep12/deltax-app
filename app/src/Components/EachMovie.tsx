@@ -31,7 +31,7 @@ export default function EachMovie(props) {
       <div className="each-movie-col col-md-2">
         {movie.cast
           ? movie.cast.map((item, index) => {
-              return <div className="col">{item.label}</div>;
+              return <li>{item.label}</li>;
             })
           : ""}
       </div>

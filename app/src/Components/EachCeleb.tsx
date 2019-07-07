@@ -4,7 +4,6 @@ export default function EachCeleb(props) {
   const { celeb } = props;
   return (
     <div className="row each-movie-row">
-      {console.log(props)}
       <div className="col-md-2 each-movie-col">{celeb.name}</div>
       <div className="col-md-2 each-movie-col">
         {format(new Date(celeb.dob), "dd/MM/yyyy")}

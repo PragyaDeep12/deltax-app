@@ -18,7 +18,7 @@ export default function ShowMovies() {
         <h4 className="ml-2">Show Movies</h4>
         <hr />
       </span>
-      <div className="row text-center bg-light">
+      <div className="row text-left bg-light">
         <div className="col-md-3">
           <h5>PICTURE</h5>
         </div>
