@@ -8,6 +8,8 @@ import { uploadFile, downloadFile } from "../Dao/FirebaseDao";
 import { addMovie } from "../Dao/MovieDao";
 import { Link } from "react-router-dom";
 import AddCeleb from "./AddCeleb";
+
+import { Redirect } from "react-router-dom";
 import { openSnackbar } from "./CustomSnackbar";
 export default function AddMovies(props) {
   const { movie } = props;
@@ -19,6 +21,7 @@ export default function AddMovies(props) {
   const [downloadUrl, setDownloadUrl] = useState<string>("");
   const [uploadImage, setUploadImage] = useState();
   const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [redirect, setRedirect] = useState<boolean>(false);
   let isMounted = false;
 
   const setMovieModel = (movieModel: MovieModel) => {
@@ -106,9 +109,12 @@ export default function AddMovies(props) {
           message: "Sorry, " + err.message
         });
       });
+    setRedirect(true);
   };
+
   return (
     <div>
+      {redirect ? <Redirect to="/movies/show" /> : null}
       <h5>{movie ? "Edit Movie" : "Add Movie"}</h5>
       <div>
         <div className="basic-form">
