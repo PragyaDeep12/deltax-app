@@ -47,23 +47,12 @@ export default function AddCeleb(props) {
               placeholder="Enter Name"
               onChange={e => {
                 setName(e.target.value);
-                console.log(e.target.value);
               }}
             />
-            {/* <input
-                type="text"
-                id="outlined-full-width"
-                label="Name"
-                placeholder="Enter Name"
-                onChange={e => {
-                  setName(e.target.value);
-                  console.log(e.target.value);
-                }}
-              /> */}
+
             <div className="row">
               <SingleSelect
                 setGenderFunction={value => {
-                  console.log(value);
                   setGender(value);
                 }}
               />
@@ -73,7 +62,6 @@ export default function AddCeleb(props) {
               <DatePicker
                 fullWidth
                 setDateFunction={value => {
-                  console.log(value);
                   setDob(value);
                 }}
               />
@@ -84,36 +72,9 @@ export default function AddCeleb(props) {
               placeholder="Enter Bio"
               onChange={e => {
                 setBio(e.target.value);
-                console.log(e.target.value);
               }}
             />
-            {/* <TextField
-                id="outlined-full-width"
-                label="Bio"
-                style={{ margin: 0 }}
-                placeholder="Enter Bio"
-                fullWidth
-                margin="normal"
-                variant="outlined"
-                InputLabelProps={{
-                  shrink: true
-                }}
-                onChange={e => {
-                  setBio(e.target.value);
-                  console.log(e.target.value);
-                }}
-              />
-              <br />
-              <br /> */}
-            <br />
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={formSubmit}
-            >
-              Add Celebrity
-            </button>
-            <br />
+
             <button
               className="btn btn-light"
               onClick={() => {
@@ -121,6 +82,14 @@ export default function AddCeleb(props) {
               }}
             >
               Cancel
+            </button>
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={formSubmit}
+            >
+              Add Celebrity
             </button>
           </form>
         </div>

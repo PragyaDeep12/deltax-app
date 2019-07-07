@@ -114,9 +114,7 @@ export default function ShowMovies() {
         <div className="col-md-2">
           <h5>CAST</h5>
         </div>
-        <div className="col-md-1">
-          <h5>EDIT</h5>
-        </div>
+        <div className="col-md-1" />
       </div>
       {movieList.map((item, index) => {
         return <EachMovie movie={item} key={index} />;

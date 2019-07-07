@@ -79,13 +79,7 @@ export default function ShowCelebs() {
     // }
   ]);
   useEffect(() => {
-    getCelebs(setCelebList)
-      .then(res => {
-        // setCelebList(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    getCelebs(setCelebList);
   }, []);
 
   return (

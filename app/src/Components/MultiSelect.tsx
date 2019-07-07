@@ -29,6 +29,7 @@ import { getCelebs } from "../Dao/CelebDao";
 import CelebsModel from "../Models/CelebsModel";
 import AddCeleb from "./AddCeleb";
 import { openModal } from "./CustomBootDialog";
+import { getCloudFirestore } from "../Dao/FirebaseDao";
 interface OptionType {
   label?: string | any;
   value?: string | any;
@@ -338,6 +339,7 @@ export default function MultiSelect(props) {
   //   value: suggestion.label,
   //   label: suggestion.label
   // }));
+
   const [celebList, setCelebList]: [Array<CelebsModel>, any] = useState([]);
 
   const callBack = async clist => {
@@ -346,24 +348,49 @@ export default function MultiSelect(props) {
     //   setSuggestion([...suggestions, celeb]);
     // });
   };
+
+  let isMounted = false;
   useEffect(() => {
-    var list: OptionType[] = [];
+    if (!isMounted) {
+      isMounted = true;
+      if (props && props.cast) {
+        var casts: OptionType[] = props.cast;
+        handleChangeMulti(casts);
+      }
+      getCloudFirestore()
+        .collection("celebs")
+        .onSnapshot(
+          snapshot => {
+            var list: Array<CelebsModel> = [];
+
+            snapshot.docs.forEach(QueryDocumentSnapShot => {
+              var data = QueryDocumentSnapShot.data();
+              var celeb: CelebsModel = {
+                name: data.name,
+                bio: data.bio,
+                dob: data.dob,
+                gender: data.gender
+              };
+              // console.log(celeb);
+              list.push(celeb);
+            });
+            setCelebList(list);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+    }
+  }, []);
+
+  useEffect(() => {
+    var sugestList: OptionType[] = [];
     celebList.map((item, index) => {
       let celeb: OptionType = { value: item.name, label: item.name };
-      list.push(celeb);
+      sugestList.push(celeb);
     });
-    setSuggestion(list);
+    setSuggestion(sugestList);
   }, [celebList]);
-  useEffect(() => {
-    getCelebs(setCelebList)
-      .then(res => {
-        // callBack();
-        // setCelebList(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
   async function handleChangeMulti(value: ValueType<OptionType>) {
     await setMulti(value);
     console.log(multi);

@@ -10,6 +10,7 @@ import LoginContext from "./Contexts/LoginContext";
 import LoginSignup from "./Pages/LoginSignup";
 import CustomBootDialog from "./Components/CustomBootDialog";
 import StartApp from "./Pages/StartApp";
+import CustomSnackbar from "./Components/CustomSnackbar";
 function App() {
   const {
     state: { loginInfo }
@@ -18,6 +19,7 @@ function App() {
     <div className="App">
       <LoginProvider>
         <CustomBootDialog />
+        <CustomSnackbar />
         <Router>
           <Route
             path="/signup"

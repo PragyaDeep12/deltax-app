@@ -31,21 +31,23 @@ export default function EachMovie(props) {
       <div className="each-movie-col col-md-2">
         {movie.cast
           ? movie.cast.map((item, index) => {
-              return <div className="col">{item.name}</div>;
+              return <div className="col">{item.label}</div>;
             })
           : ""}
       </div>
-      <div className="each-movie-col col-md-1">
-        <Link
-          to={{
-            pathname: "/movies/edit",
-            state: {
-              movie: movie
-            }
-          }}
-        >
-          <img className="edit-icon  absolute-center" />
-        </Link>
+      <div className="col-md-1">
+        <div className="edit-icon-holder">
+          <Link
+            to={{
+              pathname: "/movies/edit",
+              state: {
+                movie: movie
+              }
+            }}
+          >
+            <img className="edit-icon  absolute-center" />
+          </Link>
+        </div>
       </div>
     </div>
   );

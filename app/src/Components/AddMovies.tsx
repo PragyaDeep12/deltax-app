@@ -8,6 +8,7 @@ import { uploadFile, downloadFile } from "../Dao/FirebaseDao";
 import { addMovie } from "../Dao/MovieDao";
 import { Link } from "react-router-dom";
 import AddCeleb from "./AddCeleb";
+import { openSnackbar } from "./CustomSnackbar";
 export default function AddMovies(props) {
   const { movie } = props;
   const [name, setName] = useState("");
@@ -74,7 +75,7 @@ export default function AddMovies(props) {
       });
   };
   const formSubmit = e => {
-    var movie: MovieModel = {
+    var movieM: MovieModel = {
       name: name,
       plot: plot,
       cast: cast,
@@ -82,12 +83,28 @@ export default function AddMovies(props) {
       yearOfRelease: yearOfRelease
     };
 
-    addMovie(movie)
+    addMovie(movieM)
       .then(res => {
+        if (res.isValid) {
+          if (movie && movie.movie) {
+            openSnackbar({
+              timeout: 3000,
+              message: "Movie Details Updated Successfully"
+            });
+          } else {
+            openSnackbar({
+              timeout: 3000,
+              message: "Movie Added Successfully"
+            });
+          }
+        }
         console.log(res);
       })
       .catch(err => {
-        console.log(err);
+        openSnackbar({
+          timeout: 3000,
+          message: "Failed To Update Movie Details"
+        });
       });
   };
   return (
@@ -171,6 +188,7 @@ export default function AddMovies(props) {
 
             <div className="input-group mb-3 cast-selector">
               <MultiSelect
+                cast={movie && movie.movie ? movie.movie.cast : ""}
                 setCastFunction={value => {
                   setCast(value);
                 }}
