@@ -74,23 +74,25 @@ export default function AddCeleb(props) {
                 setBio(e.target.value);
               }}
             />
+            <br />
+            <div className="text-right">
+              <button
+                className="btn btn-light"
+                onClick={() => {
+                  closeDialog();
+                }}
+              >
+                Cancel
+              </button>
 
-            <button
-              className="btn btn-light"
-              onClick={() => {
-                closeDialog();
-              }}
-            >
-              Cancel
-            </button>
-
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={formSubmit}
-            >
-              Add Celebrity
-            </button>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={formSubmit}
+              >
+                Add Celebrity
+              </button>
+            </div>
           </form>
         </div>
       </div>

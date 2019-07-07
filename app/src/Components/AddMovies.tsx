@@ -103,7 +103,7 @@ export default function AddMovies(props) {
       .catch(err => {
         openSnackbar({
           timeout: 3000,
-          message: "Failed To Update Movie Details"
+          message: "Sorry, " + err.message
         });
       });
   };
