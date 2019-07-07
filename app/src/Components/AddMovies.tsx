@@ -92,7 +92,6 @@ export default function AddMovies(props) {
   };
   return (
     <div>
-      <AddCeleb />
       <h5>{movie ? "Edit Movie" : "Add Movie"}</h5>
       <div>
         <div className="basic-form">
@@ -177,20 +176,7 @@ export default function AddMovies(props) {
                 }}
               />
             </div>
-            <div className="input-group-append">
-              <span
-                className="input-group-text"
-                id="inputGroupFileAddon02"
-                onClick={() => {
-                  var elm = document.getElementById("addCeleb");
-                  if (elm) {
-                    elm.style.visibility = "visible";
-                  }
-                }}
-              >
-                + Celeb
-              </span>
-            </div>
+
             <img
               src={isUploading ? UploadingIcon : poster ? poster : PreviewImage}
               className="preview-image"

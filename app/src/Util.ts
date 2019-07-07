@@ -1,5 +1,7 @@
 import MovieModel from "./Models/MovieModel";
 import CelebsModel from "./Models/CelebsModel";
+
+//check celebrity validation
 export function isValidCeleb(
   celeb: CelebsModel
 ): { isValid: boolean; message: String } {
@@ -24,6 +26,7 @@ export function isValidCeleb(
   }
   return { isValid: false, message: "celeb is Null" };
 }
+//checks movie validation
 export function isValidMovie(
   movie: MovieModel
 ): { isValid: boolean; message: String } {

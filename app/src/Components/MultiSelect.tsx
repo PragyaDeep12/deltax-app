@@ -27,6 +27,8 @@ import { ValueType } from "react-select";
 import { useState, useEffect } from "react";
 import { getCelebs } from "../Dao/CelebDao";
 import CelebsModel from "../Models/CelebsModel";
+import AddCeleb from "./AddCeleb";
+import { openModal } from "./CustomBootDialog";
 interface OptionType {
   label?: string | any;
   value?: string | any;
@@ -87,15 +89,34 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function NoOptionsMessage(props: NoticeProps<OptionType>) {
-  alert("Want to Add the Option " + props);
+  // alert("Want to Add the Option " + props);
   return (
-    <Typography
-      color="textSecondary"
-      className={props.selectProps.classes.noOptionsMessage}
+    // <Typography
+    //   color="textSecondary"
+    //   className={props.selectProps.classes.noOptionsMessage}
+    //   {...props.innerProps}
+    //   onClick={() => {
+    //     // alert("Want to Add the Option " + props);
+    //     openModal(<AddCeleb />);
+    //   }}
+    // >
+    //   <span className="list-add-new-item">Add New Item</span>
+    // </Typography>
+    <MenuItem
+      ref={props.innerRef}
+      // selected={props.isFocused}
+      component="div"
+      style={{
+        fontWeight: props.isSelected ? 500 : 400
+      }}
       {...props.innerProps}
+      onClick={() => {
+        // alert("Want to Add the Option " + props);
+        openModal(<AddCeleb />);
+      }}
     >
-      {props.children}
-    </Typography>
+      <span className="list-add-new-item">Add New Item</span>
+    </MenuItem>
   );
 }
 
@@ -318,16 +339,30 @@ export default function MultiSelect(props) {
   //   label: suggestion.label
   // }));
   const [celebList, setCelebList]: [Array<CelebsModel>, any] = useState([]);
+
   const callBack = async clist => {
-    await clist.map((item, index) => {
-      let celeb: OptionType = { value: item.name, label: item.name };
-      setSuggestion([...suggestions, celeb]);
-    });
+    // await clist.map((item, index) => {
+    //   let celeb: OptionType = { value: item.name, label: item.name };
+    //   setSuggestion([...suggestions, celeb]);
+    // });
   };
   useEffect(() => {
-    getCelebs(setCelebList).then(res => {
-      callBack(celebList);
+    var list: OptionType[] = [];
+    celebList.map((item, index) => {
+      let celeb: OptionType = { value: item.name, label: item.name };
+      list.push(celeb);
     });
+    setSuggestion(list);
+  }, [celebList]);
+  useEffect(() => {
+    getCelebs(setCelebList)
+      .then(res => {
+        // callBack();
+        // setCelebList(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
   async function handleChangeMulti(value: ValueType<OptionType>) {
     await setMulti(value);

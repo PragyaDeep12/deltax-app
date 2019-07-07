@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import EachCeleb from "./EachCeleb";
 import { getCelebs } from "../Dao/CelebDao";
 import AddCeleb from "./AddCeleb";
+import { openModal } from "./CustomBootDialog";
 export default function ShowCelebs() {
   const [celebList, setCelebList]: [Array<CelebsModel>, any] = useState([
     // {
@@ -78,20 +79,22 @@ export default function ShowCelebs() {
     // }
   ]);
   useEffect(() => {
-    getCelebs(setCelebList);
+    getCelebs(setCelebList)
+      .then(res => {
+        // setCelebList(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   return (
     <div className="mt-1 mb-1">
-      <AddCeleb />
       <div className="text-right">
         <button
           className="btn btn-success ml-1 mr-3"
           onClick={() => {
-            var elm = document.getElementById("addCeleb");
-            if (elm) {
-              elm.style.visibility = "visible";
-            }
+            openModal(<AddCeleb />);
           }}
         >
           +Celebrity

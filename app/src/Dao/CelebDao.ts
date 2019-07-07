@@ -1,7 +1,7 @@
 import { getCloudFirestore } from "./FirebaseDao";
 
-import { isValidCeleb } from "../Util";
 import CelebsModel from "../Models/CelebsModel";
+import { isValidCeleb } from "../Util";
 
 //Add Movie to Backend
 export function addCeleb(celeb: CelebsModel): Promise<any> {
@@ -32,34 +32,56 @@ export function addCeleb(celeb: CelebsModel): Promise<any> {
   return promise;
 }
 export const getCelebs = async setCelebList => {
-  var list: Array<CelebsModel> = [];
   var promise = new Promise((resolve, reject) => {
+    var list: Array<CelebsModel> = [];
     getCloudFirestore()
       .collection("celebs")
-      .onSnapshot(async snapshot => {
-        await snapshot.docChanges().map((change, index) => {
-          if (change.type === "added") {
-            // console.log("New city: ", change.doc.data());
-            var data = change.doc.data();
-            var celeb: CelebsModel = {
-              name: data.name,
-              bio: data.bio,
-              dob: data.dob,
-              gender: data.gender
-            };
-            if (celeb) list.push(celeb);
-          }
-          if (change.type === "modified") {
-            //   console.log("Modified city: ", change.doc.data());
-          }
-          if (change.type === "removed") {
-            //   console.log("Removed city: ", change.doc.data());
-          }
-        });
-        console.log(list);
-        setCelebList(list);
+      .onSnapshot(
+        async snapshot => {
+          snapshot.docs.forEach(
+            QueryDocumentSnapShot => {
+              var data = QueryDocumentSnapShot.data();
+              var celeb: CelebsModel = {
+                name: data.name,
+                bio: data.bio,
+                dob: data.dob,
+                gender: data.gender
+              };
+              list.push(celeb);
+            },
+            err => {
+              console.log(err);
+            }
+          );
+          // await snapshot.docChanges().map((change, index) => {
+          //   if (change.type === "added") {
+          //     // console.log("New city: ", change.doc.data());
+          //     var data = change.doc.data();
+          //     var celeb: CelebsModel = {
+          //       name: data.name,
+          //       bio: data.bio,
+          //       dob: data.dob,
+          //       gender: data.gender
+          //     };
+          //     if (celeb) list.push(celeb);
+          //   }
+          //   if (change.type === "modified") {
+          //     //   console.log("Modified city: ", change.doc.data());
+          //   }
+          //   if (change.type === "removed") {
+          //     //   console.log("Removed city: ", change.doc.data());
+          //   }
+          // });
+          console.log(list);
+          setCelebList(list);
+          resolve(list);
 
-        // console.log(movieList);
-      });
+          // console.log(movieList);
+        },
+        err => {
+          reject(null);
+        }
+      );
   });
+  return promise;
 };

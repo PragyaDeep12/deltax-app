@@ -8,7 +8,7 @@ import MainPage from "./Pages/MainPage";
 import LoginProvider from "./Contexts/LoginProvider";
 import LoginContext from "./Contexts/LoginContext";
 import LoginSignup from "./Pages/LoginSignup";
-
+import CustomBootDialog from "./Components/CustomBootDialog";
 import StartApp from "./Pages/StartApp";
 function App() {
   const {
@@ -17,6 +17,7 @@ function App() {
   return (
     <div className="App">
       <LoginProvider>
+        <CustomBootDialog />
         <Router>
           <Route
             path="/signup"

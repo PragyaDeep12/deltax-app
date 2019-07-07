@@ -6,7 +6,8 @@ import CelebsModel from "../Models/CelebsModel";
 import { TextField } from "@material-ui/core";
 import { addCeleb } from "../Dao/CelebDao";
 import { Redirect } from "react-router-dom";
-export default function AddCeleb() {
+import { closeDialog } from "./CustomBootDialog";
+export default function AddCeleb(props) {
   // const { movie } = props.movie;
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
@@ -24,40 +25,32 @@ export default function AddCeleb() {
       .then(res => {
         console.log(res);
         if (res.isValid) {
-          var elm = document.getElementById("addCeleb");
-          if (elm) {
-            elm.style.visibility = "visible";
-          }
+          closeDialog();
         }
       })
       .catch(err => console.log(err));
   };
   return (
-    <div
-      className="loading-background"
-      style={{ visibility: "hidden" }}
-      id="addCeleb"
-    >
-      <div className="popup bg-light">
-        <h5> Add Celebrity</h5>
+    <div className="popup bg-light">
+      <h5> Add Celebrity</h5>
+      <div>
         <div>
-          <div>
-            {/* <h2 className="">Register</h2> */}
-            <form
-              onSubmit={e => {
-                formSubmit(e);
+          {/* <h2 className="">Register</h2> */}
+          <form
+            onSubmit={e => {
+              formSubmit(e);
+            }}
+          >
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Name"
+              onChange={e => {
+                setName(e.target.value);
+                console.log(e.target.value);
               }}
-            >
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Name"
-                onChange={e => {
-                  setName(e.target.value);
-                  console.log(e.target.value);
-                }}
-              />
-              {/* <input
+            />
+            {/* <input
                 type="text"
                 id="outlined-full-width"
                 label="Name"
@@ -67,34 +60,34 @@ export default function AddCeleb() {
                   console.log(e.target.value);
                 }}
               /> */}
-              <div className="row">
-                <SingleSelect
-                  setGenderFunction={value => {
-                    console.log(value);
-                    setGender(value);
-                  }}
-                />
-              </div>
-              <br />
-              <div>
-                <DatePicker
-                  fullWidth
-                  setDateFunction={value => {
-                    console.log(value);
-                    setDob(value);
-                  }}
-                />
-              </div>
-              <br />
-              <textarea
-                className="form-control"
-                placeholder="Enter Bio"
-                onChange={e => {
-                  setBio(e.target.value);
-                  console.log(e.target.value);
+            <div className="row">
+              <SingleSelect
+                setGenderFunction={value => {
+                  console.log(value);
+                  setGender(value);
                 }}
               />
-              {/* <TextField
+            </div>
+            <br />
+            <div>
+              <DatePicker
+                fullWidth
+                setDateFunction={value => {
+                  console.log(value);
+                  setDob(value);
+                }}
+              />
+            </div>
+            <br />
+            <textarea
+              className="form-control"
+              placeholder="Enter Bio"
+              onChange={e => {
+                setBio(e.target.value);
+                console.log(e.target.value);
+              }}
+            />
+            {/* <TextField
                 id="outlined-full-width"
                 label="Bio"
                 style={{ margin: 0 }}
@@ -112,28 +105,24 @@ export default function AddCeleb() {
               />
               <br />
               <br /> */}
-              <br />
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={formSubmit}
-              >
-                Add Celebrity
-              </button>
-              <br />
-              <button
-                className="btn btn-light"
-                onClick={() => {
-                  var elm = document.getElementById("addCeleb");
-                  if (elm) {
-                    elm.style.visibility = "hidden";
-                  }
-                }}
-              >
-                Cancel
-              </button>
-            </form>
-          </div>
+            <br />
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={formSubmit}
+            >
+              Add Celebrity
+            </button>
+            <br />
+            <button
+              className="btn btn-light"
+              onClick={() => {
+                closeDialog();
+              }}
+            >
+              Cancel
+            </button>
+          </form>
         </div>
       </div>
     </div>

@@ -511,3 +511,6 @@ a {
 .cast-selector {
   height: 50px !important;
 }
+.list-add-new-item {
+  cursor: pointer;
+}
