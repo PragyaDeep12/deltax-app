@@ -102,6 +102,7 @@ export default function AddMovies(props) {
           }
         }
         console.log(res);
+        setRedirect(true);
       })
       .catch(err => {
         openSnackbar({
@@ -109,7 +110,6 @@ export default function AddMovies(props) {
           message: "Sorry, " + err.message
         });
       });
-    setRedirect(true);
   };
 
   return (
