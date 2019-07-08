@@ -126,6 +126,7 @@ export default function AddMovies(props) {
                 }}
                 className="form-control"
                 value={name}
+                disabled={movie ? true : false}
                 placeholder={"Movie Name"}
               />
             </div>
